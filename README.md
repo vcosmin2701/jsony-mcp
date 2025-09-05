@@ -15,17 +15,12 @@ A Model Context Protocol (MCP) server that provides tools for managing JSON data
 
 ### Option 1: Install from npm
 ```bash
-npm install -g @your-username/mcp-json-server
+npm install -g jsony-mcp
 ```
 
-### Option 2: Install from GitHub
+### Option 2: Local Development
 ```bash
-npm install -g github:your-username/mcp-json-server
-```
-
-### Option 3: Local Development
-```bash
-git clone https://github.com/your-username/mcp-json-server.git
+git clone https://github.com/vcosmin2701/jsony-mcp
 cd mcp-json-server
 npm install
 npm run build
@@ -44,7 +39,7 @@ Add the server to your Claude desktop configuration file:
 {
   "mcpServers": {
     "json-manager": {
-      "command": "mcp-json-server"
+      "command": "jsony-mcp"
     }
   }
 }
@@ -72,7 +67,7 @@ You can customize this location using the `MCP_JSON_DATA_DIR` environment variab
 {
   "mcpServers": {
     "json-manager": {
-      "command": "mcp-json-server",
+      "command": "jsony-mcp",
       "env": {
         "MCP_JSON_DATA_DIR": "/custom/path/to/data"
       }
@@ -164,7 +159,7 @@ MIT
 
 ## Author
 
-Your Name
+Vladut Cosmin
 
 ## Links
 

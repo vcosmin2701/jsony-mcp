@@ -12,7 +12,13 @@
     "dev": "tsx watch src/server.ts",
     "prepublishOnly": "npm run build"
   },
-  "keywords": ["mcp", "modelcontextprotocol", "json", "database", "claude"],
+  "keywords": [
+    "mcp",
+    "modelcontextprotocol",
+    "json",
+    "database",
+    "claude"
+  ],
   "author": "vcosmin2701",
   "license": "MIT",
   "repository": {
@@ -22,7 +28,8 @@
   "homepage": "https://github.com/vcosmin2701/jsony-mcp/blob/main/README.md",
   "type": "commonjs",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.17.5"
+    "@modelcontextprotocol/sdk": "^1.17.5",
+    "jsony-mcp": "^1.0.1"
   },
   "devDependencies": {
     "@types/node": "^24.3.1",

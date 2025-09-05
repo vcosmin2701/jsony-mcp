@@ -1,10 +1,10 @@
 {
-  "name": "@your-username/mcp-json-server",
+  "name": "jsony-mcp",
   "version": "1.0.0",
   "description": "A Model Context Protocol server for managing JSON data files",
   "main": "dist/server.js",
   "bin": {
-    "mcp-json-server": "./dist/server.js"
+    "jsony-mcp": "./dist/server.js"
   },
   "scripts": {
     "build": "tsc",

@@ -15,7 +15,7 @@ export class Configuration implements IConfiguration {
   constructor() {
     this.dataDir = this.resolveDataDirectory();
     this.serverName = 'json-manager';
-    this.serverVersion = '1.0.0';
+    this.serverVersion = '1.0.4';
   }
 
   private resolveDataDirectory(): string {

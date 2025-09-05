@@ -1,116 +1,172 @@
-# MCP JSON Server Architecture
+# MCP JSON Server
 
-## Overview
-The MCP JSON Server has been refactored following clean code principles, SOLID principles, and TypeScript best practices.
+A Model Context Protocol (MCP) server that provides tools for managing JSON data files. This server allows AI assistants like Claude to read, write, query, and manage JSON files in a structured way.
 
-## Directory Structure
-```
-src/
-├── config/             # Configuration management
-│   └── Configuration.ts
-├── container/          # Dependency injection
-│   └── DependencyContainer.ts
-├── errors/             # Custom error types
-│   └── CustomErrors.ts
-├── handlers/           # Tool handlers (Strategy pattern)
-│   ├── ToolHandler.ts
-│   └── index.ts
-├── repositories/       # Data access layer
-│   └── JsonFileRepository.ts
-├── services/           # Business logic layer
-│   └── JsonDataService.ts
-├── types/              # TypeScript interfaces and types
-│   └── index.ts
-├── McpJsonServer.ts    # Main server class
-└── server.ts           # Entry point
+## Features
+
+- **Add JSON Objects**: Add new objects to JSON files with automatic ID and timestamp generation
+- **Query Objects**: Search for objects by property values
+- **Update Objects**: Modify existing objects by index
+- **Delete Objects**: Remove objects from JSON files
+- **List Files**: View all available JSON files
+- **Retrieve Objects**: Get all objects from a specific file
+
+## Installation
+
+### Option 1: Install from npm
+```bash
+npm install -g @your-username/mcp-json-server
 ```
 
-## Design Patterns & Principles
+### Option 2: Install from GitHub
+```bash
+npm install -g github:your-username/mcp-json-server
+```
 
-### SOLID Principles
+### Option 3: Local Development
+```bash
+git clone https://github.com/your-username/mcp-json-server.git
+cd mcp-json-server
+npm install
+npm run build
+```
 
-#### Single Responsibility Principle (SRP)
-- **Configuration**: Manages server configuration
-- **Repository**: Handles file I/O operations
-- **Service**: Contains business logic
-- **Handlers**: Process individual tool requests
-- **Container**: Manages dependencies
+## Configuration
 
-#### Open/Closed Principle (OCP)
-- New tool handlers can be added without modifying existing code
-- Base classes allow extension through inheritance
+### Claude Desktop Configuration
 
-#### Liskov Substitution Principle (LSP)
-- All handlers implement `IToolHandler` interface
-- Services and repositories use interfaces for substitutability
+Add the server to your Claude desktop configuration file:
 
-#### Interface Segregation Principle (ISP)
-- Focused interfaces for each layer (IConfiguration, IJsonFileRepository, IJsonDataService)
-- No forced implementation of unnecessary methods
+**macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+**Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
 
-#### Dependency Inversion Principle (DIP)
-- High-level modules depend on abstractions (interfaces)
-- Dependency injection through constructor parameters
-
-### Design Patterns
-
-#### Strategy Pattern
-- Tool handlers implement a common interface
-- Server dynamically selects handler based on tool name
-
-#### Repository Pattern
-- Abstracts data access logic
-- Separates business logic from data persistence
-
-#### Dependency Injection
-- `DependencyContainer` manages object creation and dependencies
-- Improves testability and maintainability
-
-#### Factory Method
-- Container creates instances of services and handlers
-
-## Key Components
-
-### Configuration
-- Environment-based configuration
-- Default to `~/.mcp-json-server/data` for data storage
-- Configurable via `MCP_JSON_DATA_DIR` environment variable
-
-### Error Handling
-- Custom error hierarchy with `BaseError`
-- Specific error types for different scenarios
-- Proper error propagation and logging
-
-### Type Safety
-- Comprehensive TypeScript interfaces
-- Strong typing throughout the codebase
-- Parameter validation in handlers
-
-## Benefits
-
-1. **Testability**: Each component can be tested in isolation
-2. **Maintainability**: Clear separation of concerns
-3. **Extensibility**: Easy to add new features without breaking existing code
-4. **Type Safety**: Full TypeScript support with proper typing
-5. **Error Handling**: Robust error management with custom error types
-6. **Configuration**: Flexible configuration management
-
-## Adding New Tools
-
-To add a new tool:
-1. Create a new handler class extending `BaseToolHandler`
-2. Implement the `execute` method
-3. Register the handler in `DependencyContainer`
-
-Example:
-```typescript
-export class MyNewToolHandler extends BaseToolHandler {
-  constructor(private readonly service: IJsonDataService) {
-    super('my_new_tool', 'Description', { /* schema */ });
-  }
-  
-  public async execute(args: any): Promise<ToolResult> {
-    // Implementation
+```json
+{
+  "mcpServers": {
+    "json-manager": {
+      "command": "mcp-json-server"
+    }
   }
 }
 ```
+
+For local development:
+```json
+{
+  "mcpServers": {
+    "json-manager": {
+      "command": "node",
+      "args": ["/path/to/mcp-json-server/dist/server.js"]
+    }
+  }
+}
+```
+
+### Data Directory
+
+By default, JSON files are stored in `~/.mcp-json-server/data/`
+
+You can customize this location using the `MCP_JSON_DATA_DIR` environment variable:
+
+```json
+{
+  "mcpServers": {
+    "json-manager": {
+      "command": "mcp-json-server",
+      "env": {
+        "MCP_JSON_DATA_DIR": "/custom/path/to/data"
+      }
+    }
+  }
+}
+```
+
+## Usage
+
+Once configured, Claude can use the following tools:
+
+### add_json_object
+Add a new object to a JSON file:
+```
+Add to todos.json: {"title": "Buy groceries", "completed": false}
+```
+
+### get_json_objects
+Retrieve all objects from a file:
+```
+Get all items from todos.json
+```
+
+### query_json_objects
+Search for objects by property:
+```
+Find all completed tasks in todos.json
+```
+
+### update_json_object
+Update an object at a specific index:
+```
+Update index 0 in todos.json: set completed to true
+```
+
+### delete_json_object
+Remove an object by index:
+```
+Delete item at index 2 from todos.json
+```
+
+### list_json_files
+List all available JSON files:
+```
+Show me all JSON files
+```
+
+## Architecture
+
+The server follows clean code principles and SOLID design patterns:
+
+- **Separation of Concerns**: Modular architecture with distinct layers
+- **Dependency Injection**: Improved testability and maintainability
+- **Strategy Pattern**: Extensible tool handler system
+- **Repository Pattern**: Abstracted data access layer
+- **Error Handling**: Custom error types with proper propagation
+
+See [ARCHITECTURE.md](ARCHITECTURE.md) for detailed documentation.
+
+## Development
+
+### Build
+```bash
+npm run build
+```
+
+### Run in Development
+```bash
+npm run dev
+```
+
+### Test Locally
+```bash
+npm start
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## License
+
+MIT
+
+## Author
+
+Your Name
+
+## Links
+
+- [Model Context Protocol Documentation](https://modelcontextprotocol.io)
+- [MCP Servers Registry](https://github.com/modelcontextprotocol/servers)

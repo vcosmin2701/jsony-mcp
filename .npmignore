@@ -1,0 +1,14 @@
+src/
+data/
+.env
+*.ts
+!*.d.ts
+tsconfig.json
+.git/
+.gitignore
+node_modules/
+*.log
+.DS_Store
+ARCHITECTURE.md
+*.test.js
+*.test.ts

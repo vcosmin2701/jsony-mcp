@@ -1,16 +1,25 @@
 {
-  "name": "mcp-json-server",
+  "name": "@your-username/mcp-json-server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A Model Context Protocol server for managing JSON data files",
+  "main": "dist/server.js",
+  "bin": {
+    "mcp-json-server": "./dist/server.js"
+  },
   "scripts": {
     "build": "tsc",
     "start": "tsx src/server.ts",
-    "dev": "tsx watch src/server.ts"
+    "dev": "tsx watch src/server.ts",
+    "prepublishOnly": "npm run build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["mcp", "modelcontextprotocol", "json", "database", "claude"],
+  "author": "vcosmin2701",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vcosmin2701/jsony-mcp"
+  },
+  "homepage": "https://github.com/vcosmin2701/jsony-mcp/blob/main/README.md",
   "type": "commonjs",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.17.5"

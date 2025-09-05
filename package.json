@@ -1,6 +1,6 @@
 {
   "name": "jsony-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Model Context Protocol server for managing JSON data files",
   "main": "dist/server.js",
   "bin": {

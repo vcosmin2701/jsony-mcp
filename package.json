@@ -1,6 +1,6 @@
 {
   "name": "jsony-mcp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Model Context Protocol server for managing JSON data files",
   "main": "dist/server.js",
   "bin": {
@@ -28,8 +28,7 @@
   "homepage": "https://github.com/vcosmin2701/jsony-mcp/blob/main/README.md",
   "type": "commonjs",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.17.5",
-    "jsony-mcp": "^1.0.1"
+    "@modelcontextprotocol/sdk": "^1.17.5"
   },
   "devDependencies": {
     "@types/node": "^24.3.1",
